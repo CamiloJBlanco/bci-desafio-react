@@ -34,7 +34,7 @@ const SocialButton = ({ children, label, href }) => {
   );
 };
 
-export const Footer = () => {
+export const FooterComponent = () => {
   return (
     <Box
       bg={useColorModeValue('gray.50', 'gray.900')}
