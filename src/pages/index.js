@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import styles from '@/styles/Home.module.css';
-import { FooterComponent } from '@/components/footer';
-import { HeadComponent } from '@/components/head';
 import { HomeComponent } from '@/components/Home';
-import { ToggleComponent } from '@/components/toggle';
+import Layout from '@/components/layout';
 
 export default function Home() {
   const [name, setName] = useState(undefined);
   const [data, setData] = useState([]);
+  const [error, setError] = useState(false);
   const [fetching, setFetching] = useState(false);
 
   async function fetchDefaultData() {
@@ -21,24 +19,28 @@ export default function Home() {
 
   async function fetchDataByName(name) {
     setFetching(true);
-    const res = await fetch(`/api/getPokemonByNameApi?name=${name}`);
-    const data = await res.json();
-    setData(data);
+    setError(false);
+    try {
+      const res = await fetch(`/api/getPokemonByNameApi?name=${name}`);
+      const data = await res.json();
+      setData(data);
+    } catch (error) {
+      setError(true);
+    }
     setFetching(false);
   }
-
   useEffect(() => {
     !name ? fetchDefaultData() : fetchDataByName(name);
   }, [name]);
 
   return (
-    <>
-      <HeadComponent />
-      <ToggleComponent />
-      <div className={styles.main}>
-        <HomeComponent data={data} fetching={fetching} />
-      </div>
-      <FooterComponent />
-    </>
+    <Layout>
+      <HomeComponent
+        data={data}
+        fetching={fetching}
+        setName={setName}
+        error={error}
+      />
+    </Layout>
   );
 }
