@@ -1,45 +1,67 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { HomeComponent } from '@/components/Home';
 import Layout from '@/components/layout';
+import { useSelector, useDispatch } from 'react-redux';
+import { setData, setFetching } from '@/store/store';
+import { registerServiceWorker } from '../../serviceWorker';
 
 export default function Home() {
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.data);
+  const fetching = useSelector((state) => state.fetching);
+
   const [name, setName] = useState(undefined);
-  const [data, setData] = useState([]);
   const [error, setError] = useState(false);
-  const [fetching, setFetching] = useState(false);
 
   async function fetchDefaultData() {
-    setFetching(true);
-    const res = await fetch(`/api/getDefaultPokemonList`);
-    const data = await res.json();
-    const results = data.results;
-    setData(results);
-    setFetching(false);
+    dispatch(setFetching(true));
+    try {
+      const res = await fetch(`/api/getDefaultPokemonList`);
+      const data = await res.json();
+      const results = data.results;
+      dispatch(setData(results));
+      localStorage.setItem('pokemonData', JSON.stringify(results)); // save data to local storage
+    } catch (err) {
+      setError(err);
+    }
+    dispatch(setFetching(false));
   }
 
   async function fetchDataByName(name) {
-    setFetching(true);
+    console.log(name);
+    dispatch(setFetching(true));
     try {
       const res = await fetch(`/api/getPokemonByNameApi?name=${name}`);
       const data = await res.json();
-      setData(data);
-    } catch (error) {
-      setError(error);
+      dispatch(setData(data));
+      localStorage.setItem('pokemonData', JSON.stringify(data)); // save data to local storage
+    } catch (err) {
+      setError(err);
     }
-    setFetching(false);
+    dispatch(setFetching(false));
   }
-  
+
   useEffect(() => {
-    !name ? fetchDefaultData() : fetchDataByName(name);
-  }, [name]);
+    const storedData = localStorage.getItem('pokemonData');
+    if (!navigator.onLine && storedData) {
+      const parsedData = JSON.parse(storedData);
+      const filteredData = parsedData.filter(
+        (pokemon) => pokemon.name === name
+      );
+      dispatch(setData(filteredData)); // retrieve filtered data from local storage
+    } else {
+      !name ? fetchDefaultData() : fetchDataByName(name);
+    }
+    registerServiceWorker();
+  }, [name, registerServiceWorker]);
 
   return (
     <Layout>
       <HomeComponent
         data={data}
+        error={error}
         fetching={fetching}
         setName={setName}
-        error={error}
       />
     </Layout>
   );

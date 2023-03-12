@@ -1,4 +1,4 @@
-import { CircularProgress, Stack, Box, Text } from '@chakra-ui/react';
+import { CircularProgress, Text } from '@chakra-ui/react';
 
 export const LoaderComponent = () => {
   return (

@@ -33,8 +33,8 @@ export const SearchBar = ({ setName }) => {
             value={searchTerm}
             onChange={handleInputChange}
           />
-          <InputRightElement width="4rem">
-            <Button h="1.5rem" size="sm" type="submit">
+          <InputRightElement width="6rem">
+            <Button h="2rem" size="sm" type="submit">
               {'Search'}
             </Button>
           </InputRightElement>

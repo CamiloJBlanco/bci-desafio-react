@@ -1,6 +1,5 @@
 import { CapitalizedString } from '@/utils/capitalizedString';
 import {
-  Box,
   Grid,
   GridItem,
   List,
@@ -14,7 +13,6 @@ import { useDispatch } from 'react-redux';
 import { setPokemon } from '../store/store';
 
 export const ListComponent = ({ data }) => {
-
   const dispatch = useDispatch();
 
   const handleButtonClick = (data) => {
@@ -24,7 +22,7 @@ export const ListComponent = ({ data }) => {
   return (
     <Grid templateColumns="repeat(6, 1fr)" gap={5} alignItems="center" ml={5}>
       {(Array.isArray(data) ? data : [data]).map((result, index) => {
-        const id = result.url?.split('/').filter(Boolean).pop() ?? result.id;
+        const id = result?.url?.split('/').filter(Boolean).pop() ?? result?.id;
         return (
           <GridItem key={index}>
             <List>
