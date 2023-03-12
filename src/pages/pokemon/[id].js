@@ -17,7 +17,6 @@ export default function Pokemon() {
 
   const [error, setError] = useState(false);
   const fetching = useSelector((state) => state.fetching);
-  const location = useSelector((state) => state.location);
   const pokemonDetails = useSelector((state) => state.pokemonDetails);
 
   async function fetchDataById(id) {
@@ -27,7 +26,6 @@ export default function Pokemon() {
       const data = await res.json();
       dispatch(setPokemonDetails(data));
       fetchLocationData(id);
-      // Store data in local storage
       localStorage.setItem('pokemonDetails', JSON.stringify(data));
       localStorage.setItem('id', id);
     } catch (err) {
@@ -41,7 +39,6 @@ export default function Pokemon() {
       const res = await fetch(`/api/getPokemonLocationIdApi?id=${id}`);
       const locations = await res.json();
       dispatch(setLocation(locations));
-      // Store data in local storage
       localStorage.setItem('location', JSON.stringify(locations));
     } catch (err) {
       setError(err);
@@ -74,11 +71,7 @@ export default function Pokemon() {
       {fetching ? (
         <LoaderComponent />
       ) : !fetching && pokemonDetails.id == id ? (
-        <CardComponent
-          pokemonDetails={pokemonDetails}
-          id={id}
-          location={location}
-        />
+        <CardComponent pokemonDetails={pokemonDetails} id={id} />
       ) : (
         <FallBackComponent />
       )}

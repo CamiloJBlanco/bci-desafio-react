@@ -21,28 +21,30 @@ export const ListComponent = ({ data }) => {
 
   return (
     <Grid templateColumns="repeat(6, 1fr)" gap={5} alignItems="center" ml={5}>
-      {(Array.isArray(data) ? data : [data]).map((result, index) => {
-        const id = result?.url?.split('/').filter(Boolean).pop() ?? result?.id;
-        return (
-          <GridItem key={index}>
-            <List>
-              <ListItem display="flex" alignItems="center">
-                <ListIcon as={MdCatchingPokemon} color="green.300" />
-                {result?.name && (
-                  <Link
-                    href={`/pokemon/${id}`}
-                    onClick={() => handleButtonClick(result)}
-                  >
-                    <Text fontWeight="bold">
-                      {CapitalizedString(result.name)}
-                    </Text>
-                  </Link>
-                )}
-              </ListItem>
-            </List>
-          </GridItem>
-        );
-      })}
+      {(Array.isArray(data) ? data.slice(0, 150) : [data].slice(0, 150)).map(
+        (result, index) => {
+          const id = result.url?.split('/').filter(Boolean).pop() ?? result.id;
+          return (
+            <GridItem key={index}>
+              <List>
+                <ListItem display="flex" alignItems="center">
+                  <ListIcon as={MdCatchingPokemon} color="green.300" />
+                  {result?.name && (
+                    <Link
+                      href={`/pokemon/${id}`}
+                      onClick={() => handleButtonClick(result)}
+                    >
+                      <Text fontWeight="bold">
+                        {CapitalizedString(result.name)}
+                      </Text>
+                    </Link>
+                  )}
+                </ListItem>
+              </List>
+            </GridItem>
+          );
+        }
+      )}
     </Grid>
   );
 };
