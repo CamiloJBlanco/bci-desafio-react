@@ -21,6 +21,7 @@ export default function Home() {
       const results = data.results;
       dispatch(setData(results));
       localStorage.setItem('pokemonData', JSON.stringify(results)); // save data to local storage
+      setError(false);
     } catch (err) {
       setError(err);
     }
@@ -28,13 +29,13 @@ export default function Home() {
   }
 
   async function fetchDataByName(name) {
-    console.log(name);
     dispatch(setFetching(true));
     try {
       const res = await fetch(`/api/getPokemonByNameApi?name=${name}`);
       const data = await res.json();
       dispatch(setData(data));
       localStorage.setItem('pokemonData', JSON.stringify(data)); // save data to local storage
+      setError(false);
     } catch (err) {
       setError(err);
     }

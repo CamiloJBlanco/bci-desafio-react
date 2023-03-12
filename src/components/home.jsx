@@ -30,13 +30,12 @@ export const HomeComponent = ({ data, error, fetching, setName }) => {
       <SearchBar setName={setName} />
 
       <Box mt={5}>
-        {fetching && !data ? (
-          <LoaderComponent />
-        ) : !fetching && error ? (
-          'No se han encontrado resultados, prueba verificando el nombre del Pokémon...'
-        ) : (
-          <ListComponent data={data} />
-        )}
+        {fetching && <LoaderComponent />}
+        {!fetching &&
+          error &&
+          'No se han encontrado resultados, prueba verificando el nombre del Pokémon...'}
+
+        {!fetching && !error && <ListComponent data={data} />}
       </Box>
     </>
   );

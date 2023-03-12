@@ -17,8 +17,11 @@ import { CheckIcon } from '@chakra-ui/icons';
 import { CapitalizedString } from '@/utils/capitalizedString';
 import { FormatString } from '@/utils/formatString';
 import { LoaderComponent } from './loader';
+import { useSelector } from 'react-redux';
 
-export const CardComponent = ({ pokemonDetails, id, location }) => {
+export const CardComponent = ({ pokemonDetails, id }) => {
+  const location = useSelector((state) => state.location);
+
   const habilities = pokemonDetails?.abilities?.map(
     (ability) => ability.ability.name
   );
@@ -29,7 +32,8 @@ export const CardComponent = ({ pokemonDetails, id, location }) => {
     FormatString(loc.location_area.name)
   );
 
-  const locationsName = locations ? locations.join(', ') : 'No location found';
+  const locationsName =
+    locations && !locations != [] ? locations.join(', ') : 'No location found';
 
   const shouldBeDisplayed = pokemonDetails?.id && pokemonDetails?.name;
 
