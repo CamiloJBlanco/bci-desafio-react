@@ -1,3 +1,4 @@
+import { CapitalizedString } from '@/utils/capitalizedString';
 import {
   Box,
   Grid,
@@ -8,13 +9,11 @@ import {
   Text,
 } from '@chakra-ui/react';
 import Link from 'next/link';
-import { CgPokemon } from 'react-icons/Cg';
+import { MdCatchingPokemon } from 'react-icons/Md';
 import { useDispatch } from 'react-redux';
 import { setPokemon } from '../store/store';
 
 export const ListComponent = ({ data }) => {
-  const capitalizedString = (name) =>
-    name.charAt(0).toUpperCase() + name.slice(1);
 
   const dispatch = useDispatch();
 
@@ -30,14 +29,14 @@ export const ListComponent = ({ data }) => {
           <GridItem key={index}>
             <List>
               <ListItem display="flex" alignItems="center">
-                <ListIcon as={CgPokemon} color="red.500" />
+                <ListIcon as={MdCatchingPokemon} color="green.300" />
                 {result?.name && (
                   <Link
                     href={`/pokemon/${id}`}
                     onClick={() => handleButtonClick(result)}
                   >
                     <Text fontWeight="bold">
-                      {capitalizedString(result.name)}
+                      {CapitalizedString(result.name)}
                     </Text>
                   </Link>
                 )}

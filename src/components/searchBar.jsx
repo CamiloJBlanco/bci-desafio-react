@@ -15,7 +15,7 @@ export const SearchBar = ({ setName }) => {
   };
 
   const handleSearch = () => {
-    setName(searchTerm);
+    setName(searchTerm.toLowerCase());
   };
 
   return (

@@ -13,10 +13,7 @@ export const HomeComponent = ({ data, fetching, error, setName }) => {
             fontSize={{ base: '3xl', sm: '4xl', md: '5xl' }}
             lineHeight={'100%'}
           >
-            Pokédex <br />
-            <Text as={'span'} color={'red.400'}>
-              create by Camilo
-            </Text>
+            Pokédex
           </Heading>
           <Text
             color={'gray.500'}

@@ -19,16 +19,16 @@ export default function Home() {
 
   async function fetchDataByName(name) {
     setFetching(true);
-    setError(false);
     try {
       const res = await fetch(`/api/getPokemonByNameApi?name=${name}`);
       const data = await res.json();
       setData(data);
     } catch (error) {
-      setError(true);
+      setError(error);
     }
     setFetching(false);
   }
+  
   useEffect(() => {
     !name ? fetchDefaultData() : fetchDataByName(name);
   }, [name]);
