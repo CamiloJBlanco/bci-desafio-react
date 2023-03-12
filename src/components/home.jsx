@@ -3,7 +3,7 @@ import { ListComponent } from './list';
 import { LoaderComponent } from './loader';
 import { SearchBar } from './searchBar';
 
-export const HomeComponent = ({ data, fetching, error, setName }) => {
+export const HomeComponent = ({ data, error, fetching, setName }) => {
   return (
     <>
       <Container maxW={'4xl'}>
