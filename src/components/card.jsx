@@ -5,19 +5,20 @@ import {
   Heading,
   Text,
   Stack,
-  Avatar,
   Badge,
   List,
   ListItem,
   ListIcon,
-  Image,
-  Flex,
+  Button,
 } from '@chakra-ui/react';
 import { CheckIcon } from '@chakra-ui/icons';
 import { CapitalizedString } from '@/utils/capitalizedString';
 import { FormatString } from '@/utils/formatString';
 import { LoaderComponent } from './loader';
 import { useSelector } from 'react-redux';
+import Link from 'next/link';
+import { CardImagesHeader } from './cardImagesHeader';
+import { JoinArray } from '@/utils/joinArray';
 
 export const CardComponent = ({ pokemonDetails, id }) => {
   const location = useSelector((state) => state.location);
@@ -33,7 +34,9 @@ export const CardComponent = ({ pokemonDetails, id }) => {
   );
 
   const locationsName =
-    locations && !locations != [] ? locations.join(', ') : 'No location found';
+    locations && locations.length > 0
+      ? JoinArray(locations)
+      : 'No location found';
 
   const shouldBeDisplayed = pokemonDetails?.id && pokemonDetails?.name;
 
@@ -48,24 +51,7 @@ export const CardComponent = ({ pokemonDetails, id }) => {
             rounded={'md'}
             overflow={'hidden'}
           >
-            <Image
-              h={'120px'}
-              w={'full'}
-              src={
-                'https://images.unsplash.com/photo-1612865547334-09cb8cb455da?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80'
-              }
-              objectFit={'cover'}
-            />
-            <Flex justify={'center'} mt={-12}>
-              <Avatar
-                size={'xl'}
-                src={`https://raw.githubusercontent.com/pokeapi/sprites/master/sprites/pokemon/${id}.png`}
-                alt={'Pokemon'}
-                css={{
-                  border: '2px solid white',
-                }}
-              />
-            </Flex>
+            <CardImagesHeader id={id} />
 
             <Box p={6}>
               <Stack spacing={0} align={'center'} mb={3}>
@@ -82,7 +68,7 @@ export const CardComponent = ({ pokemonDetails, id }) => {
                   {CapitalizedString(pokemonDetails.name)}
                 </Heading>
                 <Text color={'gray.500'} mt={6}>
-                  <strong>Atacks:</strong> {attacks?.join(', ')}
+                  <strong>Atacks:</strong> {JoinArray(attacks)}
                 </Text>
               </Stack>
 
@@ -90,15 +76,15 @@ export const CardComponent = ({ pokemonDetails, id }) => {
                 <List spacing={3}>
                   <ListItem>
                     <ListIcon as={CheckIcon} color="green.400" />
-                    <strong>Habilities:</strong> {habilities?.join(', ')}
+                    <strong>Habilities:</strong> {JoinArray(habilities)}
                   </ListItem>
                   <ListItem>
                     <ListIcon as={CheckIcon} color="green.400" />
-                    <strong>Forms:</strong> {evolution?.join(', ')}
+                    <strong>Forms:</strong> {JoinArray(evolution)}
                   </ListItem>
                   <ListItem>
                     <ListIcon as={CheckIcon} color="green.400" />
-                    <strong>Location:</strong> {locationsName}
+                    <strong>Location/s:</strong> {locationsName}
                   </ListItem>
                 </List>
               </Box>
@@ -115,6 +101,26 @@ export const CardComponent = ({ pokemonDetails, id }) => {
                   </Badge>
                 ))}
               </Stack>
+
+              <Button
+                w={'full'}
+                mt={8}
+                color={'white'}
+                rounded={'md'}
+                _hover={{
+                  transform: 'translateY(-2px)',
+                  boxShadow: 'lg',
+                }}
+              >
+                <Link
+                  href={{
+                    pathname: `/pokemon/characteristics/${id}`,
+                    query: { id, name: pokemonDetails.name },
+                  }}
+                >
+                  Check characteristics!
+                </Link>
+              </Button>
             </Box>
           </Box>
         </Center>

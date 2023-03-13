@@ -28,6 +28,7 @@ export default function Pokemon() {
       fetchLocationData(id);
       localStorage.setItem('pokemonDetails', JSON.stringify(data));
       localStorage.setItem('id', id);
+      setError(false);
     } catch (err) {
       setError(err);
     }
@@ -40,6 +41,7 @@ export default function Pokemon() {
       const locations = await res.json();
       dispatch(setLocation(locations));
       localStorage.setItem('location', JSON.stringify(locations));
+      setError(false);
     } catch (err) {
       setError(err);
     }
@@ -68,9 +70,8 @@ export default function Pokemon() {
 
   return (
     <Layout>
-      {fetching ? (
-        <LoaderComponent />
-      ) : !fetching && pokemonDetails?.id == id ? (
+      {fetching && <LoaderComponent />}
+      {!fetching && pokemonDetails?.id === parseInt(id) ? (
         <CardComponent pokemonDetails={pokemonDetails} id={id} />
       ) : (
         <FallBackComponent />

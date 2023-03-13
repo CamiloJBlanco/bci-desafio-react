@@ -8,7 +8,6 @@ import { registerServiceWorker } from '../../serviceWorker';
 export default function Home() {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.data);
-  const fetching = useSelector((state) => state.fetching);
 
   const [term, setTerm] = useState(undefined);
   const [error, setError] = useState(false);
@@ -45,14 +44,15 @@ export default function Home() {
   useEffect(() => {
     const storedData = localStorage.getItem('pokemonData');
     if (!navigator.onLine && storedData) {
-      const parsedData = JSON.parse(storedData);
-      const filteredData =
-        parsedData.filter(
-          ({ name, url }) =>
-            name === term ||
-            name.includes(term) ||
-            url.match(new RegExp(`\\b${term}\\b`))
-        ) || parsedData;
+      const parsedData = JSON.parse(storedData) ?? [];
+      const filteredData = term
+        ? parsedData.filter(
+            ({ name, url }) =>
+              name === term ||
+              name.includes(term) ||
+              url.match(new RegExp(`\\b${term}\\b`))
+          )
+        : parsedData;
       dispatch(setData(filteredData));
     } else {
       !term ? fetchDefaultData() : fetchDataByName(term);
@@ -65,7 +65,6 @@ export default function Home() {
       <HomeComponent
         data={data}
         error={error}
-        fetching={fetching}
         setTerm={setTerm}
       />
     </Layout>

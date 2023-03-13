@@ -12,6 +12,7 @@ const pokemonSlice = createSlice({
     fetching: false,
     location: undefined,
     pokemonDetails: [],
+    characteristics: [],
   },
   reducers: {
     setPokemon: (state, action) => {
@@ -34,6 +35,9 @@ const pokemonSlice = createSlice({
     },
     setPokemonDetails: (state, action) => {
       state.pokemonDetails = action.payload;
+    },
+    setCharacteristics: (state, action) => {
+      state.characteristics = action.payload;
     },
   },
 });
@@ -59,4 +63,5 @@ export const {
   setFetching,
   setLocation,
   setPokemonDetails,
+  setCharacteristics,
 } = pokemonSlice.actions;
