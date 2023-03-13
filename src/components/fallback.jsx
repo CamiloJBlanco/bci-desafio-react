@@ -42,17 +42,19 @@ export const FallBackComponent = () => {
             alignSelf={'center'}
             position={'relative'}
           >
-            <Button
-              colorScheme={'green'}
-              bg={'green.400'}
-              rounded={'full'}
-              px={6}
-              _hover={{
-                bg: 'green.500',
-              }}
-            >
-              <Link href="/">Return to Home</Link>
-            </Button>
+            <Link href="/">
+              <Button
+                colorScheme={'green'}
+                bg={'green.400'}
+                rounded={'full'}
+                px={6}
+                _hover={{
+                  bg: 'green.500',
+                }}
+              >
+                Return to Home
+              </Button>
+            </Link>
           </Stack>
         </Stack>
       </Container>
