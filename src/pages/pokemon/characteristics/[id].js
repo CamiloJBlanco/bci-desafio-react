@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { FallBackComponent } from '@/components/fallback';
-import Layout from '@/components/layout';
-import { LoaderComponent } from '@/components/loader';
+import { FallBackComponent } from './../../../components/fallback';
+import Layout from './../../../components/layout';
+import { LoaderComponent } from './../../../components/loader';
 import { useRouter } from 'next/router';
-import { CharacteristicsCard } from '@/components/characteristicsCard';
+import { CharacteristicsCard } from './../../../components/characteristicsCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCharacteristics, setFetching } from '@/store/store';
+import { setCharacteristics, setFetching } from './../../../store/store';
 import { useEffect, useState } from 'react';
 
 export default function Characteristics() {

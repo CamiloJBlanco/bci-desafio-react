@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { HomeComponent } from '@/components/Home';
-import Layout from '@/components/layout';
+import { HomeComponent } from './../components/Home';
+import Layout from './../components/layout';
 import { useSelector, useDispatch } from 'react-redux';
-import { setData, setFetching } from '@/store/store';
+import { setData, setFetching } from './../store/store';
 import { registerServiceWorker } from '../../serviceWorker';
 
 export default function Home() {

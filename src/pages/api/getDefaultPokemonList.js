@@ -1,4 +1,4 @@
-import { ApiContant } from '@/contants.js';
+import { ApiContant } from './../../contants.js';
 import axios from 'axios';
 
 export default async function GetDefaultPokemonList(req, res) {

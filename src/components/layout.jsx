@@ -1,6 +1,6 @@
 import { FooterComponent } from './footer';
 import { HeadComponent } from './head';
-import styles from '@/styles/Home.module.css';
+import styles from '../styles/Home.module.css';
 import { NavBar } from './navbar';
 
 function Layout({ children }) {

@@ -2,12 +2,12 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Layout from '@/components/layout';
+import Layout from './../../components/layout';
 import { useRouter } from 'next/router';
-import { LoaderComponent } from '@/components/loader';
-import { CardComponent } from '@/components/card';
-import { setFetching, setLocation, setPokemonDetails } from '@/store/store';
-import { FallBackComponent } from '@/components/fallback';
+import { LoaderComponent } from './../../components/loader';
+import { CardComponent } from './../../components/card';
+import { setFetching, setLocation, setPokemonDetails } from './../../store/store';
+import { FallBackComponent } from './../../components/fallback';
 
 export default function Pokemon() {
   const router = useRouter();

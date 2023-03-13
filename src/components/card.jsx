@@ -12,13 +12,13 @@ import {
   Button,
 } from '@chakra-ui/react';
 import { CheckIcon } from '@chakra-ui/icons';
-import { CapitalizedString } from '@/utils/capitalizedString';
-import { FormatString } from '@/utils/formatString';
+import { CapitalizedString } from '../utils/capitalizedString';
+import { FormatString } from '../utils/formatString';
 import { LoaderComponent } from './loader';
 import { useSelector } from 'react-redux';
 import Link from 'next/link';
 import { CardImagesHeader } from './cardImagesHeader';
-import { JoinArray } from '@/utils/joinArray';
+import { JoinArray } from '../utils/joinArray';
 
 export const CardComponent = ({ pokemonDetails, id }) => {
   const location = useSelector((state) => state.location);
