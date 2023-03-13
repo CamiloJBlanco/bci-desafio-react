@@ -70,7 +70,7 @@ export default function Pokemon() {
     <Layout>
       {fetching ? (
         <LoaderComponent />
-      ) : !fetching && pokemonDetails.id == id ? (
+      ) : !fetching && pokemonDetails?.id == id ? (
         <CardComponent pokemonDetails={pokemonDetails} id={id} />
       ) : (
         <FallBackComponent />
