@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { HomeComponent } from '@/components/Home';
 import Layout from '@/components/layout';
 import { useSelector, useDispatch } from 'react-redux';
@@ -10,7 +10,7 @@ export default function Home() {
   const data = useSelector((state) => state.data);
   const fetching = useSelector((state) => state.fetching);
 
-  const [name, setName] = useState(undefined);
+  const [term, setTerm] = useState(undefined);
   const [error, setError] = useState(false);
 
   async function fetchDefaultData() {
@@ -28,10 +28,10 @@ export default function Home() {
     dispatch(setFetching(false));
   }
 
-  async function fetchDataByName(name) {
+  async function fetchDataByName(term) {
     dispatch(setFetching(true));
     try {
-      const res = await fetch(`/api/getPokemonByNameApi?name=${name}`);
+      const res = await fetch(`/api/getPokemonByTermApi?term=${term}`);
       const data = await res.json();
       dispatch(setData(data));
       localStorage.setItem('pokemonData', JSON.stringify(data)); // save data to local storage
@@ -46,15 +46,19 @@ export default function Home() {
     const storedData = localStorage.getItem('pokemonData');
     if (!navigator.onLine && storedData) {
       const parsedData = JSON.parse(storedData);
-      const filteredData = parsedData.filter(
-        (pokemon) => pokemon.name === name
-      );
-      dispatch(setData(filteredData)); // retrieve filtered data from local storage
+      const filteredData =
+        parsedData.filter(
+          ({ name, url }) =>
+            name === term ||
+            name.includes(term) ||
+            url.match(new RegExp(`\\b${term}\\b`))
+        ) || parsedData;
+      dispatch(setData(filteredData));
     } else {
-      !name ? fetchDefaultData() : fetchDataByName(name);
+      !term ? fetchDefaultData() : fetchDataByName(term);
     }
     registerServiceWorker();
-  }, [name, registerServiceWorker]);
+  }, [term, registerServiceWorker]);
 
   return (
     <Layout>
@@ -62,7 +66,7 @@ export default function Home() {
         data={data}
         error={error}
         fetching={fetching}
-        setName={setName}
+        setTerm={setTerm}
       />
     </Layout>
   );

@@ -7,7 +7,7 @@ import {
   Stack,
 } from '@chakra-ui/react';
 
-export const SearchBar = ({ setName }) => {
+export const SearchBar = ({ setTerm }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleInputChange = (event) => {
@@ -15,7 +15,7 @@ export const SearchBar = ({ setName }) => {
   };
 
   const handleSearch = () => {
-    setName(searchTerm.toLowerCase());
+    setTerm(searchTerm.toLowerCase());
   };
 
   return (

@@ -3,7 +3,7 @@ import { ListComponent } from './list';
 import { LoaderComponent } from './loader';
 import { SearchBar } from './searchBar';
 
-export const HomeComponent = ({ data, error, fetching, setName }) => {
+export const HomeComponent = ({ data, error, fetching, setTerm }) => {
   return (
     <>
       <Container maxW={'4xl'}>
@@ -27,7 +27,7 @@ export const HomeComponent = ({ data, error, fetching, setName }) => {
         </Stack>
       </Container>
 
-      <SearchBar setName={setName} />
+      <SearchBar setTerm={setTerm} />
 
       <Box mt={5}>
         {fetching && <LoaderComponent />}
