@@ -1,38 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## Pokédex done by Camilo
 
-First, run the development server:
+The app consists of generating a Pokédex with the first 151 Pokémon for this I used 2 API. The first thing I looked for information on is: 
+- https://pokeapi.co/
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+And the second, where I found the images of the Pokémon:
+- https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{id-pokemon}.png
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+The idea was that at the beginning the first 150 Pokémon (in my case first 1000) and the application shows you the list and allows doing a search based on name (I choose to be able to search by name and ID). Within the detail of each Pokémon must go:
+-Type
+- Evolution
+- Attacks
+- Skills
+- Places where you can find
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Finally, I should generate a series of submenus of my choice, I decided to add the characteristics card.
 
-## Learn More
+Please notice:
 
-To learn more about Next.js, take a look at the following resources:
+1. Pokémon can be search by name and id online and offline.
+2. When searching offline you can find the Pokémon name that includes the string enter, the exact match on name and the exact match on id. For example: "pika", "pikachu" and "25" will all find "pikachu". When searching on online you cannot find the Pokémon name that includes the string enter (e.g: "pika") because the API does not support this.
+3. When accesing offline the first 1000 Pokémon have been saved, so you can find them.
+4. Last time you access online will save the Pokémon card, so when accesing offline if the id saved does not match the url id, it will show a fallback component because data has not been save for that Pokémon. If the id is the same, it will show the Pokémon details.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Working sample: https://youtu.be/u00CbCdrsRE
