@@ -78,24 +78,24 @@ export const CharacteristicsCard = ({ id, name }) => {
             ))}
           </Stack>
 
-          <Button
-            w={'full'}
-            mt={8}
-            color={'white'}
-            rounded={'md'}
-            _hover={{
-              transform: 'translateY(-2px)',
-              boxShadow: 'lg',
+          <Link
+            href={{
+              pathname: `/pokemon/${id}`,
             }}
           >
-            <Link
-              href={{
-                pathname: `/pokemon/${id}`,
+            <Button
+              w={'full'}
+              mt={8}
+              color={'white'}
+              rounded={'md'}
+              _hover={{
+                transform: 'translateY(-2px)',
+                boxShadow: 'lg',
               }}
             >
               Return to details!
-            </Link>
-          </Button>
+            </Button>
+          </Link>
         </Box>
       </Box>
     </Center>

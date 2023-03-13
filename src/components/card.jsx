@@ -102,25 +102,25 @@ export const CardComponent = ({ pokemonDetails, id }) => {
                 ))}
               </Stack>
 
-              <Button
-                w={'full'}
-                mt={8}
-                color={'white'}
-                rounded={'md'}
-                _hover={{
-                  transform: 'translateY(-2px)',
-                  boxShadow: 'lg',
+              <Link
+                href={{
+                  pathname: `/pokemon/characteristics/${id}`,
+                  query: { id, name: pokemonDetails.name },
                 }}
               >
-                <Link
-                  href={{
-                    pathname: `/pokemon/characteristics/${id}`,
-                    query: { id, name: pokemonDetails.name },
+                <Button
+                  w={'full'}
+                  mt={8}
+                  color={'white'}
+                  rounded={'md'}
+                  _hover={{
+                    transform: 'translateY(-2px)',
+                    boxShadow: 'lg',
                   }}
                 >
                   Check characteristics!
-                </Link>
-              </Button>
+                </Button>
+              </Link>
             </Box>
           </Box>
         </Center>
