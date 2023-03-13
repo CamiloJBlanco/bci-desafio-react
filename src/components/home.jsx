@@ -1,9 +1,12 @@
 import { Box, Heading, Container, Text, Stack } from '@chakra-ui/react';
+import { useSelector } from 'react-redux';
 import { ListComponent } from './list';
 import { LoaderComponent } from './loader';
 import { SearchBar } from './searchBar';
 
-export const HomeComponent = ({ data, error, fetching, setTerm }) => {
+export const HomeComponent = ({ data, error, setTerm }) => {
+  const fetching = useSelector((state) => state.fetching);
+
   return (
     <>
       <Container maxW={'4xl'}>
@@ -31,11 +34,10 @@ export const HomeComponent = ({ data, error, fetching, setTerm }) => {
 
       <Box mt={5}>
         {fetching && <LoaderComponent />}
+        {!fetching && !error && <ListComponent data={data} />}
         {!fetching &&
           error &&
-          'No se han encontrado resultados, prueba verificando el nombre del Pokémon...'}
-
-        {!fetching && !error && <ListComponent data={data} />}
+          'No results found, try verifying the name or id of the Pokémon...'}
       </Box>
     </>
   );
