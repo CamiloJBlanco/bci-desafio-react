@@ -27,3 +27,7 @@ Please notice:
 4. Last time you access online will save the Pokémon card, so when accesing offline if the id saved does not match the url id, it will show a fallback component because data has not been save for that Pokémon. If the id is the same, it will show the Pokémon details.
 
 Working sample: https://youtu.be/u00CbCdrsRE
+
+*To run the project:*
+- npm install
+- npm run dev
